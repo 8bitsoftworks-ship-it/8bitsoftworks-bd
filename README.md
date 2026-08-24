@@ -67,10 +67,12 @@ the catalog is hard-coded into the marketplace or product-page components.
 4. Deploy. Cloudflare will give you a free `*.pages.dev` URL immediately;
    a custom domain can be attached later from the same dashboard.
 
-`public/_redirects` is included so client-side routing (React Router) works
-correctly — all paths fall back to `index.html`. No build-time configuration
-file is required for Cloudflare Pages; the `public/` folder is copied to the
-root of the published site.
+Client-side routing (React Router) is handled by `wrangler.jsonc`, which
+configures Cloudflare's static assets with
+`not_found_handling: single-page-application` — all unknown paths fall back
+to `index.html` with a 200. A legacy `public/_redirects` catch-all is no
+longer used because it conflicts with Cloudflare's automatic `.html`/`/index`
+stripping and causes an infinite-loop build error.
 
 ### Alternative free hosts
 
