@@ -49,7 +49,7 @@ function Restaurant({ accent }) {
   );
 }
 
-function Architecture({ accent }) {
+function Architecture() {
   return (
     <div className="h-full w-full bg-[#F4F4EF] flex flex-col p-3 gap-2">
       <div className="flex items-center justify-between font-mono text-[8px] text-ink/50">
@@ -97,7 +97,7 @@ function Saas({ accent }) {
   );
 }
 
-function Ecommerce({ accent }) {
+function Ecommerce() {
   return (
     <div className="h-full w-full bg-[#EFEEE7] flex flex-col p-3 gap-1.5">
       <div className="flex items-center justify-between font-mono text-[8px] text-ink/50">
@@ -196,6 +196,95 @@ function Cafe({ accent }) {
   );
 }
 
+function Travel({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#F4EFE8] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between font-mono text-[8px] text-ink/50">
+        <span>VELLORE</span>
+        <span>TRIPS / DESTINATIONS</span>
+      </div>
+      <div className="flex-1 flex flex-col justify-center">
+        <div className="font-display text-[17px] leading-none text-ink">
+          Lisbon, four ways.
+        </div>
+        <div className="font-mono text-[8px] mt-1" style={{ color: accent }}>
+          8 DAYS · €1,400 · SMALL GROUP
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-1.5">
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="aspect-[4/3]" style={{ background: i === 0 ? accent : "#D8D2C6" }} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Wellness({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#F2F7F2] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between font-mono text-[8px] text-ink/50">
+        <span>HEALWISE</span>
+        <span className="px-1.5 py-0.5" style={{ background: accent, color: "#fff" }}>BOOK</span>
+      </div>
+      <div className="flex-1 flex flex-col justify-center gap-1">
+        <div className="font-display text-[15px] leading-none text-ink">Feel better,</div>
+        <div className="font-display italic text-[15px] leading-none" style={{ color: accent }}>
+          measured.
+        </div>
+      </div>
+      <div className="flex gap-1.5">
+        {["PHYSIO", "OSTEO", "MASSAGE"].map((s) => (
+          <div key={s} className="flex-1 border border-ink/10 px-1 py-1 font-mono text-[6.5px] text-ink/55">
+            {s}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Finance({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#EEF0E7] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between font-mono text-[8px] text-ink/50">
+        <span>LEDGER & PINE</span>
+        <span>CHARTERED ACCOUNTANTS</span>
+      </div>
+      <div className="flex-1 flex items-center">
+        <div className="font-display text-[15px] leading-[1.05] text-ink">
+          Your books,
+          <br />
+          <span style={{ color: accent }}>boring again.</span>
+        </div>
+      </div>
+      <div className="border-t border-ink/10 pt-1.5 font-mono text-[7px] text-ink/45">
+        Vat · Payroll · Tax · Audit
+      </div>
+    </div>
+  );
+}
+
+function Realestate({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#F3EFE7] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between font-mono text-[8px] text-ink/50">
+        <span>OPENLOT</span>
+        <span>234 LISTINGS</span>
+      </div>
+      <div className="grid grid-cols-3 gap-1.5 flex-1">
+        {[0, 1, 2, 3, 4, 5].map((i) => (
+          <div key={i} className="bg-ink/[0.07] flex flex-col justify-end p-1">
+            <div className="font-mono text-[6px] text-ink/45">৳{2.4 + i * 0.7}M</div>
+            <div className="h-px mt-0.5" style={{ background: accent }} />
+          </div>
+        ))}
+      </div>
+      <div className="font-mono text-[7px] text-ink/45">BANANI · DHANMONDI · GULSHAN</div>
+    </div>
+  );
+}
+
 const VARIANTS = {
   restaurant: Restaurant,
   architecture: Architecture,
@@ -205,6 +294,10 @@ const VARIANTS = {
   portfolio: Portfolio,
   agency: Agency,
   cafe: Cafe,
+  travel: Travel,
+  wellness: Wellness,
+  finance: Finance,
+  realestate: Realestate,
 };
 
 export default function PreviewFrame({ variant, accent = "#39D9A0", name, className = "", showChrome = true, url }) {

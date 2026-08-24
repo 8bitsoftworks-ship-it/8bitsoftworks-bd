@@ -57,9 +57,31 @@ export default function FieldNotes() {
         </div>
       </section>
 
-      <footer id="contact" className="border-t border-ink/15 px-6 py-8 text-[11px] text-ink/40 flex justify-between">
+      <section id="reading" className="border-t border-ink/15">
+        <div className="mx-auto max-w-3xl px-6 py-14">
+          <h2 className="text-[11px] text-ink/40 uppercase mb-6">Now reading</h2>
+          <div className="flex flex-col gap-2">
+            {[
+              ["The Design of Everyday Things", "Don Norman"],
+              ["Slow Productivity", "Cal Newport"],
+              ["Working in Public", "Nadia Eghbal"],
+            ].map(([title, author]) => (
+              <a key={title} href="#" className="group flex justify-between py-2 border-b border-ink/10">
+                <span className="text-[13.5px] group-hover:text-[#1F8F69] transition-colors">{title}</span>
+                <span className="text-[11px] text-ink/40">{author}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer id="contact" className="border-t border-ink/15 px-6 py-8 flex flex-col sm:flex-row gap-3 sm:items-center justify-between text-[11px] text-ink/40">
         <span>Field Notes — Demo website</span>
-        <a href="mailto:hello@example.com" className="hover:text-ink">hello@example.com</a>
+        <div className="flex gap-5">
+          <a href="mailto:hello@example.com" className="hover:text-ink">Email</a>
+          <a href="#" className="hover:text-ink">RSS</a>
+          <a href="#" className="hover:text-ink">GitHub</a>
+        </div>
       </footer>
       <DemoBadge siteId="field-notes" />
     </div>

@@ -80,6 +80,43 @@ export default function Forma() {
         </a>
       </section>
 
+      <section className="border-t border-[#181818]/10 bg-white">
+        <div className="mx-auto max-w-5xl px-6 py-16 md:py-20">
+          <h2 className="font-mono text-[11px] uppercase tracking-wide text-[#181818]/50 mb-8">Membership</h2>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {[
+              ["Drop-in", "৳600", "Per class, no commitment."],
+              ["Monthly", "৳3,500", "Unlimited classes, one location."],
+              ["Off-peak", "৳2,200", "All classes before 5pm, Mon–Fri."],
+            ].map(([tier, price, desc]) => (
+              <div key={tier} className="border border-[#181818]/10 p-6">
+                <span className="font-mono text-[10.5px] uppercase tracking-wide text-[#181818]/45">{tier}</span>
+                <div className="font-display font-semibold text-[26px] mt-2">{price}</div>
+                <p className="text-[12.5px] text-[#181818]/55 mt-2">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#181818]/10">
+        <div className="mx-auto max-w-5xl px-6 py-16 md:py-18">
+          <h2 className="font-mono text-[11px] uppercase tracking-wide text-[#181818]/50 mb-8">Why people stay</h2>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {[
+              ["“Six classes a week, same coaches, no surprises. That's the whole appeal.”", "— Farzana, member 2 yrs"],
+              ["“The 6am session is the most consistent hour of my week.”", "— Imran"],
+              ["“I moved three times and never left. Nothing else comes close.”", "— Shreya"],
+            ].map(([quote, who]) => (
+              <div key={who} className="border border-[#181818]/10 p-5 flex flex-col justify-between">
+                <p className="text-[13px] text-[#181818]/70 leading-relaxed italic">{quote}</p>
+                <span className="font-mono text-[10px] uppercase tracking-wide text-[#FF6A3D] mt-5">{who}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <footer className="border-t border-[#181818]/10 px-6 py-8 text-center font-mono text-[10px] uppercase tracking-wide text-[#181818]/40">
         Forma — Demo website
       </footer>

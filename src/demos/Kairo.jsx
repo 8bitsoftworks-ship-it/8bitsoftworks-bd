@@ -88,7 +88,45 @@ export default function Kairo() {
         </div>
       </section>
 
-      <footer id="start" className="border-t border-white/8 px-6 py-8 text-center font-mono text-[10px] uppercase tracking-wide text-white/30">
+      <section className="border-t border-white/8">
+        <div className="mx-auto max-w-5xl px-6 py-16 md:py-20">
+          <h2 className="font-mono text-[11px] uppercase tracking-wide text-white/40 mb-8">Teams that switched</h2>
+          <div className="grid sm:grid-cols-3 gap-px bg-white/8">
+            {[
+              ["“We deleted two internal dashboards the week we adopted Kairo.”", "Reka, founder @ Tally Systems"],
+              ["“Schema diffing paid for itself on the first migration.”", "Dmitri, backend lead @ Cronworks"],
+              ["“The logs actually stay searchable. That alone is worth it.”", "Sana, platform eng @ Nordic Labs"],
+            ].map(([quote, who]) => (
+              <div key={who} className="bg-[#0E0F13] p-6 flex flex-col justify-between">
+                <p className="text-[13px] text-white/70 leading-relaxed italic">{quote}</p>
+                <span className="font-mono text-[10px] uppercase tracking-wide text-[#39D9A0] mt-5">{who}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="start" className="border-t border-white/8 bg-white/[0.02]">
+        <div className="mx-auto max-w-5xl px-6 py-16 md:py-24 text-center">
+          <h2 className="font-display font-semibold text-[30px] sm:text-[40px] leading-tight max-w-[18ch] mx-auto">
+            Stop babysitting infrastructure.
+          </h2>
+          <p className="text-white/50 text-[14px] mt-4 max-w-[44ch] mx-auto">
+            Free for one project. No card, no sales call — a working
+            `kairo status` in under five minutes.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center mt-8">
+            <a href="#" className="font-mono text-[11px] px-5 py-3.5 bg-[#39D9A0] text-[#0E0F13] hover:bg-white transition-colors">
+              Start free
+            </a>
+            <a href="#docs" className="font-mono text-[11px] px-5 py-3.5 border border-white/15 text-white hover:border-white/40 transition-colors">
+              Read the docs
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-white/8 px-6 py-8 text-center font-mono text-[10px] uppercase tracking-wide text-white/30">
         Kairo — Demo website
       </footer>
       <DemoBadge siteId="kairo" dark />

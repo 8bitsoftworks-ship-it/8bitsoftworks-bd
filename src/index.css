@@ -71,3 +71,16 @@ body {
 .scroll-thin::-webkit-scrollbar-thumb {
   background: #2B2E38;
 }
+
+/* Print rules: hide studio chrome, print cleanly */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff;
+  }
+  @page {
+    margin: 10mm;
+  }
+}

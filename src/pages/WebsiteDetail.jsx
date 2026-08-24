@@ -3,6 +3,7 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import PreviewFrame from "../components/PreviewFrame";
 import WebsiteCard from "../components/WebsiteCard";
 import { getWebsiteById, formatPrice, websites } from "../data/websites";
+import { HOSTING } from "../data/siteConfig";
 
 const DEVICE_SIZES = {
   Desktop: "w-full aspect-[16/9]",
@@ -112,6 +113,14 @@ export default function WebsiteDetail() {
                 Open Live Demo ↗
               </a>
             )}
+          </div>
+
+          {/* Hosting promo */}
+          <div className="mt-6 border border-mint-dim/40 bg-mint/10 px-4 py-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span className="font-mono text-[10px] uppercase tracking-wide text-mint-dim shrink-0">Included</span>
+            <p className="text-[13px] text-ink">
+              <strong>{HOSTING.title}</strong> on every purchase, in collaboration with 8BiT Softworks.
+            </p>
           </div>
         </div>
       </section>

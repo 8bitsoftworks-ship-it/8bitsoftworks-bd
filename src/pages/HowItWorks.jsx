@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { HOSTING } from "../data/siteConfig";
 
 const STEPS = [
   ["01", "Browse", "Find a design that fits.", "Filter the catalog by category, price, or what's currently featured."],
@@ -32,6 +33,22 @@ export default function HowItWorks() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Hosting promo */}
+        <div className="mt-10 border border-mint-dim/40 bg-mint/10 p-6 md:p-8 grid md:grid-cols-[1fr_auto] gap-4 items-center">
+          <div>
+            <div className="font-display font-semibold text-[18px] text-ink">
+              {HOSTING.title} on every purchase.
+            </div>
+            <p className="text-[13.5px] text-muted mt-1.5 max-w-[56ch] leading-relaxed">{HOSTING.note}</p>
+          </div>
+          <Link
+            to="/websites"
+            className="shrink-0 font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors text-center"
+          >
+            Pick a site →
+          </Link>
         </div>
 
         <div className="mt-10 border-t border-ink/10 pt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">

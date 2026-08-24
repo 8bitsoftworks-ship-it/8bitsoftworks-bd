@@ -20,6 +20,12 @@ import DemoKairo from "./demos/Kairo";
 import DemoArcSupply from "./demos/ArcSupply";
 import DemoForma from "./demos/Forma";
 import DemoFieldNotes from "./demos/FieldNotes";
+import DemoMonoStudio from "./demos/MonoStudio";
+import DemoEmberGrain from "./demos/EmberGrain";
+import DemoVellore from "./demos/Vellore";
+import DemoHealwise from "./demos/Healwise";
+import DemoLedgerPine from "./demos/LedgerPine";
+import DemoOpenlot from "./demos/Openlot";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -59,6 +65,12 @@ export default function App() {
         <Route path="/demos/arc-supply" element={<DemoArcSupply />} />
         <Route path="/demos/forma" element={<DemoForma />} />
         <Route path="/demos/field-notes" element={<DemoFieldNotes />} />
+        <Route path="/demos/mono-studio" element={<DemoMonoStudio />} />
+        <Route path="/demos/ember-grain" element={<DemoEmberGrain />} />
+        <Route path="/demos/vellore" element={<DemoVellore />} />
+        <Route path="/demos/healwise" element={<DemoHealwise />} />
+        <Route path="/demos/ledger-pine" element={<DemoLedgerPine />} />
+        <Route path="/demos/openlot" element={<DemoOpenlot />} />
 
         <Route path="*" element={<StudioLayout><NotFound /></StudioLayout>} />
       </Routes>

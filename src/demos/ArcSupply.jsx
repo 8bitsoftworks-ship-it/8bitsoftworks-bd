@@ -80,6 +80,40 @@ export default function ArcSupply() {
         </div>
       </section>
 
+      <section className="border-t border-ink/10">
+        <div className="mx-auto max-w-6xl px-6 py-16 md:py-20 grid md:grid-cols-2 gap-12">
+          <div>
+            <h2 className="font-mono text-[11px] uppercase tracking-wide text-ink/50 mb-6">Good to know</h2>
+            <div className="flex flex-col">
+              {[
+                ["Sizing", "Cut generously, so you can size down if you're between. Exchanges are free."],
+                ["Shipping", "Flat ৳120 across Bangladesh, free over ৳5,000. Orders leave within two days."],
+                ["Restocks", "Twice a year, announced here first. Sold-out pieces rarely come back."],
+                ["Returns", "14 days, no questions, as long as it's unworn. We mean it."],
+              ].map(([q, a]) => (
+                <div key={q} className="grid grid-cols-[120px_1fr] gap-4 py-4 border-b border-ink/10">
+                  <span className="font-serif text-[14px]">{q}</span>
+                  <p className="text-[13px] text-ink/55 leading-relaxed">{a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col justify-center">
+            <h2 className="font-serif italic text-[24px]">Twice a year, in your inbox.</h2>
+            <p className="text-[13.5px] text-ink/55 mt-3 max-w-[40ch] leading-relaxed">
+              One email when the collection drops, one when it's about to sell
+              out. Nothing monthly, nothing promotional.
+            </p>
+            <form className="mt-6 flex gap-2 max-w-sm" onSubmit={(e) => e.preventDefault()}>
+              <input type="email" required className="flex-1 border border-ink/20 bg-transparent px-3.5 py-3 text-[13px]" placeholder="you@email.com" />
+              <button className="font-mono text-[10.5px] uppercase tracking-wide bg-ink text-[#EFEEE7] px-4 hover:bg-ink/80 transition-colors">
+                Join
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
       <footer className="px-6 py-8 text-center font-mono text-[10px] uppercase tracking-wide text-ink/40">
         Arc Supply — Demo website
       </footer>

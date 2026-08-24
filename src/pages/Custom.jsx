@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { STUDIO } from "../data/siteConfig";
+
+const CONTACT_EMAIL = STUDIO.email;
 
 const WEBSITE_TYPES = [
   "Business",
@@ -35,9 +38,29 @@ export default function Custom() {
   const [type, setType] = useState("Business");
   const [budget, setBudget] = useState(BUDGETS[1]);
   const [timeline, setTimeline] = useState(TIMELINES[1]);
+  const formRef = useRef(null);
 
   function handleSubmit(e) {
     e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const lines = [
+      `New custom build request`,
+      ``,
+      `Name: ${fd.get("name") || "—"}`,
+      `Email: ${fd.get("email") || "—"}`,
+      `Business / brand: ${fd.get("business") || "—"}`,
+      `Existing website: ${fd.get("existingSite") || "—"}`,
+      `Website type: ${type}`,
+      `Budget: ${budget}`,
+      `Timeline: ${timeline}`,
+      `Features needed: ${fd.get("features") || "—"}`,
+      `Reference websites: ${fd.get("references") || "—"}`,
+      `Project description: ${fd.get("description") || "—"}`,
+      ``,
+      `We'll reply within one business day.`,
+    ];
+    const subject = `Custom build request — ${type} (${fd.get("name") || "unknown"})`;
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
     setSubmitted(true);
   }
 
@@ -48,9 +71,9 @@ export default function Custom() {
         <h1 className="font-display font-semibold text-[30px] md:text-[38px] text-ink mt-3 leading-tight">
           Got it. We'll reply within one business day.
         </h1>
-        <p className="text-[14px] text-muted mt-3">
-          We'll come back with a couple of questions, a rough scope, and a
-          real timeline — not a form-letter reply.
+        <p className="text-[14px] text-muted mt-3 max-w-[48ch] mx-auto">
+          Your email draft has opened in your mail app addressed to {CONTACT_EMAIL} — hit send and we'll come
+          back with a couple of questions, a rough scope, and a real timeline.
         </p>
       </div>
     );
@@ -71,7 +94,7 @@ export default function Custom() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="mx-auto max-w-3xl px-5 md:px-8 py-14 md:py-20">
+      <form onSubmit={handleSubmit} ref={formRef} className="mx-auto max-w-3xl px-5 md:px-8 py-14 md:py-20">
         <div className="flex flex-col gap-7">
           <div className="grid sm:grid-cols-2 gap-7">
             <Field label="Name">

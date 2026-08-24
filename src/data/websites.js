@@ -12,6 +12,10 @@ export const categories = [
   "Portfolio",
   "Agency",
   "Café",
+  "Travel",
+  "Wellness",
+  "Finance",
+  "Real Estate",
 ];
 
 export const websites = [
@@ -126,9 +130,9 @@ export const websites = [
     description:
       "A loud, confident agency site for a small creative team — oversized type on a signal-red field, sparse copy, work-first navigation.",
     longDescription:
-      "Mono Studio is built for a small creative team that wants their homepage to feel like a poster, not a brochure. Full interactive demo is being finished — the product page shows a large static preview of the current build.",
-    demoUrl: null,
-    hasFullDemo: false,
+      "Mono Studio is built for a small creative team that wants their homepage to feel like a poster, not a brochure. Oversized type, a signal-red field, and a work index that lets the projects do the talking.",
+    demoUrl: "/demos/mono-studio",
+    hasFullDemo: true,
     featured: false,
     accent: "#FF4F3F",
     theme: "dark",
@@ -144,12 +148,80 @@ export const websites = [
       "A neighbourhood café site: hours, a short seasonal menu, and a map. Nothing that needs updating more than once a season.",
     longDescription:
       "Ember & Grain is built for a small café that needs to be found, not sold. Warm paper tones, a slab serif for the menu, and a layout that a café owner could realistically keep up to date themselves.",
-    demoUrl: null,
-    hasFullDemo: false,
+    demoUrl: "/demos/ember-grain",
+    hasFullDemo: true,
     featured: false,
     accent: "#2F5D45",
     theme: "light",
     preview: "cafe",
+  },
+  {
+    id: "vellore",
+    name: "Vellore",
+    category: "Travel",
+    price: 14000,
+    tags: ["Travel", "Tours", "Hospitality"],
+    description:
+      "A boutique travel company site built around curated trips — destination-led pages, an itinerary section, and a book-a-trip flow that stays simple.",
+    longDescription:
+      "Vellore is for a small travel outfit selling hand-built itineraries rather than package deals. The homepage leads with a rotating destination strip, trips are laid out as editorial cards, and every page funnels towards a booking enquiry without a clunky widget.",
+    demoUrl: "/demos/vellore",
+    hasFullDemo: true,
+    featured: false,
+    accent: "#E75E3B",
+    theme: "light",
+    preview: "travel",
+  },
+  {
+    id: "healwise",
+    name: "Healwise",
+    category: "Wellness",
+    price: 13500,
+    tags: ["Wellness", "Clinic", "Health"],
+    description:
+      "A calm, trustworthy clinic site: services, practitioners, and an appointment flow — teal tones, generous spacing, no stock-photo chaos.",
+    longDescription:
+      "Healwise is built for a wellness or physio clinic that wants patients to feel reassured before they even call. Service cards, a practitioner grid, and a simple appointment enquiry form — all in a palette chosen to feel clean rather than clinical.",
+    demoUrl: "/demos/healwise",
+    hasFullDemo: true,
+    featured: false,
+    accent: "#1F8F69",
+    theme: "light",
+    preview: "wellness",
+  },
+  {
+    id: "ledger-pine",
+    name: "Ledger & Pine",
+    category: "Finance",
+    price: 15500,
+    tags: ["Finance", "Accounting", "Consulting"],
+    description:
+      "An accounting firm site that trades fancy visuals for trust: services, team, and a clear “talk to us” path on a restrained green-and-ink palette.",
+    longDescription:
+      "Ledger & Pine is for a firm whose credibility comes from plain competence. The site leads with what they do for each kind of client, names the team, and keeps every call-to-action about starting a conversation — never about bells and whistles.",
+    demoUrl: "/demos/ledger-pine",
+    hasFullDemo: true,
+    featured: false,
+    accent: "#2F5D45",
+    theme: "light",
+    preview: "finance",
+  },
+  {
+    id: "openlot",
+    name: "Openlot",
+    category: "Real Estate",
+    price: 17500,
+    tags: ["Real Estate", "Property", "Listings"],
+    description:
+      "A property brokerage site with a searchable listing grid, neighbourhood guides, and a serious IDX-style listings layout.",
+    longDescription:
+      "Openlot is built for a real estate team whose livelihood is the listings page. The grid is dense but legible, each property card carries price and key facts at a glance, and the neighbourhood guides are written to be genuinely useful rather than marketing-flavoured.",
+    demoUrl: "/demos/openlot",
+    hasFullDemo: true,
+    featured: false,
+    accent: "#C77B2C",
+    theme: "light",
+    preview: "realestate",
   },
 ];
 

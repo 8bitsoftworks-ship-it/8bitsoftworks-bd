@@ -94,6 +94,24 @@ export default function SoraHouse() {
         </div>
       </section>
 
+      <section className="border-t border-white/10">
+        <div className="mx-auto max-w-5xl px-6 py-14 md:py-16">
+          <h2 className="font-serif italic text-[26px] mb-8">What regulars say</h2>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {[
+              ["“The only tasting menu in the city where you're not thinking about the menu.”", "— Anika, weekly regular"],
+              ["“We came for the duck. We stayed for the wine list.”", "— Rahim & Nusrat"],
+              ["“Fourteen seats means you can actually watch the cooking. It's a show, quietly.”", "— Meena, food writer"],
+            ].map(([quote, who]) => (
+              <div key={who} className="border border-white/10 p-5 flex flex-col justify-between">
+                <p className="text-[13px] text-[#EDE7DD]/75 leading-relaxed italic">{quote}</p>
+                <span className="font-mono text-[10px] uppercase tracking-wide text-[#E7A33E] mt-5">{who}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="visit" className="border-t border-white/10">
         <div className="mx-auto max-w-5xl px-6 py-16 md:py-20 grid sm:grid-cols-3 gap-8">
           <div>

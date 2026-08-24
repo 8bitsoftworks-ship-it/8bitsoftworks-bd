@@ -4,7 +4,7 @@ import PreviewFrame from "../components/PreviewFrame";
 import { websites, formatPrice } from "../data/websites";
 
 const heroSites = websites.filter((w) => w.featured).slice(0, 4);
-const indexSites = websites.slice(0, 6);
+const indexSites = websites.slice(0, 8);
 
 function CatalogIndex() {
   const [active, setActive] = useState(null);
@@ -135,6 +135,41 @@ export default function Home() {
           >
             View full catalog →
           </Link>
+        </div>
+      </section>
+
+      {/* HOSTING PROMO */}
+      <section className="mx-auto max-w-7xl px-5 md:px-8 py-14 md:py-18">
+        <div className="border border-ink/10 bg-ink text-paper grid-texture p-8 md:p-12 grid md:grid-cols-[1fr_auto] gap-8 items-center">
+          <div>
+            <span className="font-mono text-[10px] uppercase tracking-wide px-2.5 py-1 bg-mint text-ink inline-block">
+              Included with every purchase
+            </span>
+            <h2 className="font-display font-semibold text-[26px] md:text-[34px] leading-tight mt-4">
+              3 months free hosting,
+              <br className="hidden sm:block" /> in collaboration with 8BiT Softworks.
+            </h2>
+            <p className="text-paper/65 text-[14px] mt-3 max-w-[52ch] leading-relaxed">
+              Every site we sell comes with hosting arranged and set up for
+              you — free for the first three months, then at our partner's
+              standard rate (or move anywhere you like). No technical setup
+              on your end.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 md:text-right">
+            <Link
+              to="/websites"
+              className="font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 bg-mint text-ink hover:bg-paper transition-colors text-center"
+            >
+              Pick a site
+            </Link>
+            <Link
+              to="/how-it-works"
+              className="font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 border border-paper/25 text-paper hover:border-paper/60 transition-colors text-center"
+            >
+              How it works
+            </Link>
+          </div>
         </div>
       </section>
 

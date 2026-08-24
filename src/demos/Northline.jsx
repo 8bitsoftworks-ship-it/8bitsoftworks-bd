@@ -74,6 +74,35 @@ export default function Northline() {
         </div>
       </section>
 
+      <section className="border-t border-ink/10">
+        <div className="mx-auto max-w-6xl px-6 py-16 md:py-20 grid sm:grid-cols-4 gap-px bg-ink/10">
+          {[
+            ["Residential", "Houses, additions, and the occasional very patient renovation."],
+            ["Civic", "Libraries, pavilions, and modest public rooms."],
+            ["Adaptive reuse", "Old buildings given a second, more honest life."],
+            ["Interiors", "Only when the structure starts it."],
+          ].map(([n, d]) => (
+            <div key={n} className="bg-[#F4F4EF] p-6">
+              <h3 className="font-display font-semibold text-[15px]">{n}</h3>
+              <p className="text-[12.5px] text-ink/55 mt-2 leading-relaxed">{d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-12 md:py-16 grid grid-cols-3 gap-8">
+        {[
+          ["09", "people in the studio"],
+          ["17", "buildings completed"],
+          ["2014", "year we started"],
+        ].map(([n, d]) => (
+          <div key={n} className="text-center">
+            <div className="font-display font-semibold text-[32px] md:text-[40px]">{n}</div>
+            <div className="font-mono text-[10px] uppercase tracking-wide text-ink/45 mt-1">{d}</div>
+          </div>
+        ))}
+      </section>
+
       <section id="contact" className="mx-auto max-w-6xl px-6 py-16 md:py-20 flex flex-col md:flex-row justify-between gap-8">
         <div>
           <h2 className="font-display font-semibold text-[22px]">Start a project</h2>

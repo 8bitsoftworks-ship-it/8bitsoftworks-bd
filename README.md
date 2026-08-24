@@ -35,9 +35,11 @@ src/
   pages/                   # Home, Websites (marketplace), WebsiteDetail,
                            # Custom, Customize, Checkout, About, HowItWorks,
                            # Contact, NotFound
-  demos/                   # 6 fully built, visually distinct demo websites
+  demos/                   # 12 fully built, visually distinct demo websites
                            # (Sora House, Northline, Kairo, Arc Supply,
-                           # Forma, Field Notes) — reachable at /demos/:id
+                           # Forma, Field Notes, Mono Studio, Ember & Grain,
+                           # Vellore, Healwise, Ledger & Pine, Openlot) —
+                           # reachable at /demos/:id
 ```
 
 ### Adding a new ready-made website
@@ -78,12 +80,29 @@ correctly on Netlify's static hosting — all paths fall back to `index.html`.
 
 ## Payments
 
-Checkout (`src/pages/Checkout.jsx`) is built as a full purchase flow —
-website selection, customer details, customization choice, order summary,
-payment step, confirmation — but the payment step is intentionally a
-placeholder. No payment provider is wired up. To go live, integrate
-Stripe, Paddle, Polar, or Lemon Squeezy at that step (the flow is already
-structured to drop a provider's checkout/embed in as step 5).
+Checkout (`src/pages/Checkout.jsx`) is a functional purchase flow:
+- **Payment methods**: RedotPay (UID `1899721816`), bKash and Nagad
+  (`01325575123`), selectable in the checkout.
+- **Verification details**: RedotPay requires a Sender UID + Transaction ID;
+  bKash/Nagad require the sender's phone number + Transaction ID.
+- **Hosting**: every purchase includes 3 months free hosting, arranged in
+  collaboration with 8BiT Softworks.
+- **Footer-credit discount**: buyers can opt in to a 2% discount by agreeing
+  to a small "Designed by 8BiT Softworks" credit in their site footer.
+- **Submission**: confirming an order opens a pre-filled email to
+  `8bit.softworks@gmail.com` with the full order summary, which the studio
+  then verifies manually (no payment provider / backend required for the
+  static site).
+
+All account details live in `src/data/siteConfig.js` — edit them there and
+they update everywhere.
+
+## Forms & email
+
+The Custom Builds, Customize, Contact, and Checkout forms all submit by
+opening a pre-filled email to `8bit.softworks@gmail.com` (set in
+`src/data/siteConfig.js`). To switch to a form backend later, replace the
+`mailto:` handlers with your provider's POST endpoint.
 
 ## Environment variables
 
@@ -95,6 +114,7 @@ convention.
 ## Notes on content
 
 Website names, prices, and demo content (Sora House, Northline, Kairo, Arc
-Supply, Forma, Field Notes, Mono Studio, Ember & Grain) are original
-placeholder businesses created for this project — not real clients. Swap
-them out for real case studies as the studio takes on real work.
+Supply, Forma, Field Notes, Mono Studio, Ember & Grain, Vellore, Healwise,
+Ledger & Pine, Openlot) are original placeholder businesses created for
+this project — not real clients. Swap them out for real case studies as the
+studio takes on real work.

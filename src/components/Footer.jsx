@@ -1,8 +1,34 @@
 import { Link } from "react-router-dom";
+import { STUDIO, HOSTING } from "../data/siteConfig";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-ink/10 bg-paper">
+    <footer className="no-print border-t border-ink/10 bg-paper">
+      {/* Hosting promo strip */}
+      <div className="border-b border-ink/10 bg-ink text-paper">
+        <div className="mx-auto max-w-7xl px-5 md:px-8 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-[10px] uppercase tracking-wide px-2.5 py-1 bg-mint text-ink shrink-0">
+              Included
+            </span>
+            <div>
+              <div className="font-display font-semibold text-[16px] text-paper">
+                {HOSTING.title} on every purchase
+              </div>
+              <p className="text-[12.5px] text-paper/60 mt-0.5">
+                In collaboration with 8BiT Softworks — we set it up for you.
+              </p>
+            </div>
+          </div>
+          <Link
+            to="/websites"
+            className="shrink-0 font-mono text-[11px] uppercase tracking-wide px-4 py-2.5 border border-paper/25 text-paper hover:border-paper/60 transition-colors"
+          >
+            Get a site →
+          </Link>
+        </div>
+      </div>
+
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-12 grid grid-cols-2 md:grid-cols-4 gap-8">
         <div className="col-span-2 md:col-span-1">
           <div className="flex items-center gap-2.5 mb-4">
@@ -34,21 +60,22 @@ export default function Footer() {
             <li><Link to="/websites?category=Ecommerce" className="hover:text-mint-dim">Ecommerce</Link></li>
             <li><Link to="/websites?category=SaaS" className="hover:text-mint-dim">SaaS</Link></li>
             <li><Link to="/websites?category=Portfolio" className="hover:text-mint-dim">Portfolio</Link></li>
+            <li><Link to="/websites?category=Real Estate" className="hover:text-mint-dim">Real Estate</Link></li>
           </ul>
         </div>
 
         <div>
           <div className="font-mono text-[10px] uppercase tracking-wide text-muted mb-3">Contact</div>
           <ul className="flex flex-col gap-2 text-[13px] text-ink">
-            <li><a href="mailto:hello@8bitsoftworks.com" className="hover:text-mint-dim">hello@8bitsoftworks.com</a></li>
+            <li><a href={`mailto:${STUDIO.email}`} className="hover:text-mint-dim">{STUDIO.email}</a></li>
             <li><Link to="/contact" className="hover:text-mint-dim">Send a message</Link></li>
           </ul>
         </div>
       </div>
 
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-5 border-t border-ink/10 flex flex-col sm:flex-row justify-between gap-2 font-mono text-[10px] text-muted">
-        <span>© {new Date().getFullYear()} 8BiT Softworks. All builds original.</span>
-        <span>Dhaka, BD — remote-first</span>
+        <span>© {new Date().getFullYear()} {STUDIO.name}. All builds original.</span>
+        <span>{STUDIO.location}</span>
       </div>
     </footer>
   );
