@@ -3,8 +3,8 @@
 A premium ready-made website studio: browse a catalog of finished websites,
 preview them live, customize them, or request a fully custom build.
 
-Built with **React + Vite + Tailwind CSS**, deployable for free on Netlify
-(or any static host).
+Built with **React + Vite + Tailwind CSS**, deployable for free on Cloudflare
+Pages (or any static host).
 
 ## Add your logo
 
@@ -56,27 +56,29 @@ src/
 Prices, categories, and copy all live in that one data file — nothing about
 the catalog is hard-coded into the marketplace or product-page components.
 
-## Deploying to Netlify (free)
+## Deploying to Cloudflare Pages (free)
 
 1. Push this project to a GitHub repository.
-2. In Netlify: **Add new site → Import an existing project → GitHub** and
+2. In Cloudflare: **Workers & Pages → Create → Pages → Connect to Git** and
    select the repo.
-3. Build settings are already defined in `netlify.toml`:
+3. Build settings:
    - Build command: `npm run build`
-   - Publish directory: `dist`
-4. Deploy. Netlify will give you a free `*.netlify.app` URL immediately;
+   - Output directory: `dist`
+4. Deploy. Cloudflare will give you a free `*.pages.dev` URL immediately;
    a custom domain can be attached later from the same dashboard.
 
 `public/_redirects` is included so client-side routing (React Router) works
-correctly on Netlify's static hosting — all paths fall back to `index.html`.
+correctly — all paths fall back to `index.html`. No build-time configuration
+file is required for Cloudflare Pages; the `public/` folder is copied to the
+root of the published site.
 
 ### Alternative free hosts
 
+- **Netlify** — works too; a `netlify.toml` is kept in the repo if you ever
+  want to switch (build command `npm run build`, publish dir `dist`).
 - **GitHub Pages** — works too, but you'll need to set `base` in
   `vite.config.js` to your repo name and add a `404.html` → `index.html`
   redirect trick for SPA routing.
-- **Cloudflare Pages** — same build command/output directory as Netlify;
-  no extra config needed beyond the build settings above.
 
 ## Payments
 
