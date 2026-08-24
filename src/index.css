@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: #F1F2EC;
+  color: #121319;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #39D9A0;
+  color: #121319;
+}
+
+:focus-visible {
+  outline: 2px solid #39D9A0;
+  outline-offset: 2px;
+}
+
+/* faint index-card grid texture used behind hero/dark sections */
+.grid-texture {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.grid-texture-light {
+  background-image:
+    linear-gradient(to right, rgba(18,19,25,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(18,19,25,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* thin custom scrollbar for horizontal strips */
+.scroll-thin::-webkit-scrollbar {
+  height: 4px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: #2B2E38;
+}
