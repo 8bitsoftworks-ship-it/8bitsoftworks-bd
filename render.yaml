@@ -4,7 +4,6 @@ services:
     runtime: static
     repo: https://github.com/8bitsoftworks-ship-it/8bitsoftworks-bd
     branch: main
-    plan: free
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     routes:
