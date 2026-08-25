@@ -64,6 +64,38 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* Shared component classes — single source of truth for buttons, chips,
+   fields and labels so hover/active/disabled/focus states stay consistent. */
+@layer components {
+  .btn-primary {
+    @apply font-mono text-[12px] uppercase tracking-wide inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors cursor-pointer disabled:opacity-40 disabled:pointer-events-none;
+  }
+  .btn-ghost {
+    @apply font-mono text-[12px] uppercase tracking-wide inline-flex items-center justify-center gap-2 px-5 py-3.5 border border-ink/15 text-ink hover:border-ink/40 transition-colors cursor-pointer disabled:opacity-40 disabled:pointer-events-none;
+  }
+  .btn-dark-ghost {
+    @apply font-mono text-[12px] uppercase tracking-wide inline-flex items-center justify-center gap-2 px-5 py-3.5 border border-paper/25 text-paper hover:border-paper/60 transition-colors cursor-pointer disabled:opacity-40 disabled:pointer-events-none;
+  }
+  .btn-sm {
+    @apply font-mono text-[10.5px] uppercase tracking-wide inline-flex items-center justify-center gap-2 px-3 py-1.5 transition-colors cursor-pointer disabled:opacity-40 disabled:pointer-events-none;
+  }
+  .chip {
+    @apply font-mono text-[10.5px] uppercase tracking-wide px-3 py-1.5 border border-ink/15 text-ink hover:border-ink/40 transition-colors cursor-pointer;
+  }
+  .chip-on {
+    @apply font-mono text-[10.5px] uppercase tracking-wide px-3 py-1.5 bg-ink text-paper border-ink transition-colors cursor-pointer;
+  }
+  .field {
+    @apply w-full border border-ink/15 px-3.5 py-3 text-[14px] bg-transparent text-ink placeholder:text-muted/70 focus:border-ink/40 focus:outline-none transition-colors;
+  }
+  .field-sm {
+    @apply w-full border border-ink/15 px-3 py-2.5 text-[13px] bg-transparent text-ink placeholder:text-muted/60 focus:border-ink/40 focus:outline-none transition-colors;
+  }
+  .label {
+    @apply block font-mono text-[10.5px] uppercase tracking-wide text-muted;
+  }
+}
+
 /* thin custom scrollbar for horizontal strips */
 .scroll-thin::-webkit-scrollbar {
   height: 4px;

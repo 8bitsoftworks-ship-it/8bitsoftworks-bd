@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const links = [
   { to: "/websites", label: "Websites" },
+  { to: "/showcase", label: "Showcase" },
   { to: "/custom", label: "Custom Builds" },
   { to: "/how-it-works", label: "How It Works" },
   { to: "/about", label: "About" },
@@ -26,8 +27,10 @@ export default function Nav() {
 
   return (
     <header
-      className={`no-print sticky top-0 z-50 border-b transition-colors duration-300 ${
-        scrolled ? "bg-paper/95 backdrop-blur border-ink/10" : "bg-paper border-transparent"
+      className={`no-print sticky top-0 z-50 border-b transition-all duration-300 ${
+        scrolled
+          ? "bg-paper/95 backdrop-blur border-ink/10 shadow-[0_8px_24px_-20px_rgba(18,19,25,0.4)]"
+          : "bg-paper border-transparent"
       }`}
     >
       <div className="mx-auto max-w-7xl px-5 md:px-8 h-16 flex items-center justify-between">
@@ -39,7 +42,7 @@ export default function Nav() {
           </div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-6 lg:gap-7">
           {links.map((l) => (
             <NavLink
               key={l.to}

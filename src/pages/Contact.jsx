@@ -54,10 +54,10 @@ export default function Contact() {
           </div>
         ) : (
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <input required name="name" className="border border-ink/15 px-3.5 py-3 text-[14px] bg-transparent" placeholder="Name" />
-            <input required name="email" type="email" className="border border-ink/15 px-3.5 py-3 text-[14px] bg-transparent" placeholder="Email" />
-            <textarea required name="message" rows={5} className="border border-ink/15 px-3.5 py-3 text-[14px] bg-transparent" placeholder="What's on your mind?" />
-            <button type="submit" className="self-start font-mono text-[12px] uppercase tracking-wide px-6 py-3.5 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors">
+            <input required name="name" className="field" placeholder="Name" />
+            <input required name="email" type="email" className="field" placeholder="Email" />
+            <textarea required name="message" rows={5} className="field resize-none" placeholder="What's on your mind?" />
+            <button type="submit" className="btn-primary self-start">
               Send Message
             </button>
           </form>

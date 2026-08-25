@@ -9,6 +9,21 @@ export const STUDIO = {
   location: "Dhaka, Bangladesh — remote-first",
 };
 
+// Form backend endpoint. The studio's request forms submit through a free form
+// service (FormSubmit AJAX) so the recipient email can include real file
+// attachments — a `mailto:` link can never carry attachments.
+// First submission triggers a one-time activation email; click the link once
+// and submissions (with attachments) flow to the studio inbox afterwards.
+export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${STUDIO.email}`;
+
+// Admin panel passcode. Client-side only — it keeps casual visitors out of the
+// management UI, but a static site has no true server-side auth.
+export const ADMIN = {
+  passcode: "8bit-admin",
+  localStorageKey: "8bit_showcases_v1",
+  sessionKey: "8bit_admin_authed",
+};
+
 // Payment methods accepted at checkout. Each entry defines the account the
 // customer pays to, plus the two confirmation fields they must provide.
 export const PAYMENTS = {

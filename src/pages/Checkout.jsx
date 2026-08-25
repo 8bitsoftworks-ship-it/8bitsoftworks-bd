@@ -17,8 +17,7 @@ function StepHeading({ children, sub }) {
   );
 }
 
-const inputClass =
-  "border border-ink/15 px-3.5 py-3 text-[14px] bg-transparent text-ink placeholder:text-muted/60 focus:border-ink/40 transition-colors";
+const inputClass = "field";
 
 function NavButtons({ onBack, onNext, nextLabel = "Continue", backDisabled, nextDisabled }) {
   return (
@@ -26,14 +25,14 @@ function NavButtons({ onBack, onNext, nextLabel = "Continue", backDisabled, next
       <button
         onClick={onBack}
         disabled={backDisabled}
-        className="font-mono text-[12px] uppercase tracking-wide px-6 py-3.5 border border-ink/15 text-ink hover:border-ink/40 transition-colors disabled:opacity-40 disabled:pointer-events-none"
+        className="btn-ghost"
       >
         Back
       </button>
       <button
         onClick={onNext}
         disabled={nextDisabled}
-        className="font-mono text-[12px] uppercase tracking-wide px-6 py-3.5 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors disabled:opacity-40 disabled:pointer-events-none"
+        className="btn-primary"
       >
         {nextLabel}
       </button>
@@ -336,9 +335,7 @@ export default function Checkout() {
                     setMethod(key);
                     setPaymentDetails({});
                   }}
-                  className={`font-mono text-[11px] uppercase tracking-wide px-4 py-2.5 border transition-colors ${
-                    method === key ? "bg-ink text-paper border-ink" : "border-ink/15 text-ink hover:border-ink/40"
-                  }`}
+                  className={method === key ? "chip-on" : "chip"}
                 >
                   {p.name}
                 </button>

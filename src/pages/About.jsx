@@ -55,12 +55,8 @@ export default function About() {
         </div>
 
         <div className="mt-14 border-t border-ink/10 pt-10 flex flex-col sm:flex-row gap-4">
-          <Link to="/websites" className="font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors text-center">
-            Browse Ready-Made Sites
-          </Link>
-          <Link to="/custom" className="font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 border border-ink/15 text-ink hover:border-ink/40 transition-colors text-center">
-            Request a Custom Build
-          </Link>
+          <Link to="/websites" className="btn-primary">Browse Ready-Made Sites</Link>
+          <Link to="/custom" className="btn-ghost">Request a Custom Build</Link>
         </div>
       </div>
     </div>

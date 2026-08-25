@@ -10,7 +10,7 @@ export default function NotFound() {
       <p className="text-[14px] text-muted mt-2">
         Maybe it's still in the catalog. Maybe it never existed.
       </p>
-      <Link to="/" className="inline-block mt-8 font-mono text-[12px] uppercase tracking-wide px-5 py-3 border border-ink/15 text-ink hover:border-ink/40 transition-colors">
+      <Link to="/" className="inline-flex mt-8 btn-ghost">
         Back to home
       </Link>
     </div>

@@ -22,7 +22,7 @@ export default function Footer() {
           </div>
           <Link
             to="/websites"
-            className="shrink-0 font-mono text-[11px] uppercase tracking-wide px-4 py-2.5 border border-paper/25 text-paper hover:border-paper/60 transition-colors"
+            className="shrink-0 btn-dark-ghost"
           >
             Get a site →
           </Link>
@@ -47,6 +47,7 @@ export default function Footer() {
           <div className="font-mono text-[10px] uppercase tracking-wide text-muted mb-3">Studio</div>
           <ul className="flex flex-col gap-2 text-[13px] text-ink">
             <li><Link to="/websites" className="hover:text-mint-dim">Websites</Link></li>
+            <li><Link to="/showcase" className="hover:text-mint-dim">Showcase</Link></li>
             <li><Link to="/custom" className="hover:text-mint-dim">Custom Builds</Link></li>
             <li><Link to="/how-it-works" className="hover:text-mint-dim">How It Works</Link></li>
             <li><Link to="/about" className="hover:text-mint-dim">About</Link></li>
@@ -75,7 +76,10 @@ export default function Footer() {
 
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-5 border-t border-ink/10 flex flex-col sm:flex-row justify-between gap-2 font-mono text-[10px] text-muted">
         <span>© {new Date().getFullYear()} {STUDIO.name}. All builds original.</span>
-        <span>{STUDIO.location}</span>
+        <span className="flex items-center gap-4">
+          <span>{STUDIO.location}</span>
+          <Link to="/admin" className="text-muted/70 hover:text-ink transition-colors">Admin</Link>
+        </span>
       </div>
     </footer>
   );

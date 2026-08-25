@@ -65,9 +65,7 @@ export default function WebsiteDetail() {
                 <button
                   key={d}
                   onClick={() => setDevice(d)}
-                  className={`font-mono text-[10px] uppercase tracking-wide px-3 py-1.5 border transition-colors ${
-                    device === d ? "bg-ink text-paper border-ink" : "border-ink/15 text-ink hover:border-ink/40"
-                  }`}
+                  className={device === d ? "chip-on" : "chip"}
                 >
                   {d}
                 </button>
@@ -93,13 +91,13 @@ export default function WebsiteDetail() {
           <div className="flex flex-wrap gap-3 mt-6">
             <Link
               to={`/checkout/${site.id}`}
-              className="font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors"
+              className="btn-primary"
             >
               Buy This Website
             </Link>
             <Link
               to={`/customize/${site.id}`}
-              className="font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 border border-ink/15 text-ink hover:border-ink/40 transition-colors"
+              className="btn-ghost"
             >
               Customize This Website
             </Link>
@@ -153,7 +151,7 @@ export default function WebsiteDetail() {
             </p>
             <Link
               to={`/customize/${site.id}`}
-              className="inline-block font-mono text-[11px] uppercase tracking-wide px-4 py-2.5 border border-ink/15 text-ink hover:border-ink/40 transition-colors"
+              className="inline-flex btn-ghost"
             >
               Request Customization
             </Link>

@@ -53,11 +53,7 @@ export default function Websites() {
               <button
                 key={c}
                 onClick={() => setCategory(c)}
-                className={`font-mono text-[10.5px] uppercase tracking-wide px-3 py-1.5 border transition-colors ${
-                  category === c
-                    ? "bg-ink text-paper border-ink"
-                    : "border-ink/15 text-ink hover:border-ink/40"
-                }`}
+                className={category === c ? "chip-on" : "chip"}
               >
                 {c}
               </button>

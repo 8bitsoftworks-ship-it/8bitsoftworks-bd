@@ -45,7 +45,7 @@ export default function HowItWorks() {
           </div>
           <Link
             to="/websites"
-            className="shrink-0 font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors text-center"
+            className="shrink-0 btn-primary text-center"
           >
             Pick a site →
           </Link>
@@ -57,7 +57,7 @@ export default function HowItWorks() {
               Need something completely different?
             </h3>
           </div>
-          <Link to="/custom" className="font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors shrink-0">
+          <Link to="/custom" className="btn-primary shrink-0">
             Request a Custom Build →
           </Link>
         </div>

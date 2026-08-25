@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import PreviewFrame from "../components/PreviewFrame";
 import { websites, formatPrice } from "../data/websites";
+import { HOSTING } from "../data/siteConfig";
 
 const heroSites = websites.filter((w) => w.featured).slice(0, 4);
 const indexSites = websites.slice(0, 8);
@@ -78,10 +79,37 @@ export default function Home() {
               </Link>
               <Link
                 to="/custom"
-                className="font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 border border-paper/25 text-paper hover:border-paper/60 transition-colors"
+                className="btn-dark-ghost"
               >
                 Request a Custom Build
               </Link>
+            </div>
+
+            <div className="mt-12 grid grid-cols-3 gap-6 max-w-md border-t border-paper/15 pt-6">
+              <div>
+                <div className="font-display font-semibold text-[24px] text-paper font-tabular leading-none">
+                  {websites.length}
+                </div>
+                <div className="font-mono text-[9.5px] uppercase tracking-wide text-paper/50 mt-1.5">
+                  Ready-made sites
+                </div>
+              </div>
+              <div>
+                <div className="font-display font-semibold text-[24px] text-paper font-tabular leading-none">
+                  {HOSTING.freeMonths}
+                </div>
+                <div className="font-mono text-[9.5px] uppercase tracking-wide text-paper/50 mt-1.5">
+                  Months free hosting
+                </div>
+              </div>
+              <div>
+                <div className="font-display font-semibold text-[24px] text-paper leading-none">
+                  1 day
+                </div>
+                <div className="font-mono text-[9.5px] uppercase tracking-wide text-paper/50 mt-1.5">
+                  First reply
+                </div>
+              </div>
             </div>
           </div>
 
@@ -131,7 +159,7 @@ export default function Home() {
         <div className="mt-8 flex justify-end">
           <Link
             to="/websites"
-            className="font-mono text-[11px] uppercase tracking-wide px-4 py-2.5 border border-ink/15 text-ink hover:border-ink/40 transition-colors"
+            className="btn-ghost"
           >
             View full catalog →
           </Link>
@@ -165,7 +193,7 @@ export default function Home() {
             </Link>
             <Link
               to="/how-it-works"
-              className="font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 border border-paper/25 text-paper hover:border-paper/60 transition-colors text-center"
+              className="btn-dark-ghost text-center"
             >
               How it works
             </Link>
@@ -208,7 +236,7 @@ export default function Home() {
           </div>
           <Link
             to="/custom"
-            className="shrink-0 font-mono text-[12px] uppercase tracking-wide px-6 py-4 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors"
+            className="shrink-0 btn-primary"
           >
             Request a Custom Build
           </Link>

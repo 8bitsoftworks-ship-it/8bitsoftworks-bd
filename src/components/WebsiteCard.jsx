@@ -5,7 +5,7 @@ import { formatPrice } from "../data/websites";
 export default function WebsiteCard({ site, size = "default" }) {
   const tall = size === "tall";
   return (
-    <div className="group border border-ink/10 bg-white/40 hover:border-ink/25 transition-colors duration-300 flex flex-col">
+    <div className="group border border-ink/10 bg-white/40 hover:border-ink/25 transition-all duration-300 flex flex-col hover:shadow-[0_18px_40px_-20px_rgba(18,19,25,0.35)]">
       <Link to={`/websites/${site.id}`} className="block">
         <div className={`relative overflow-hidden ${tall ? "aspect-[4/5]" : "aspect-[4/3]"}`}>
           <div className="absolute inset-0 transition-transform duration-500 ease-studio group-hover:scale-[1.04]">

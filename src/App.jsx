@@ -4,6 +4,8 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
+import Showcase from "./pages/Showcase";
+import Admin from "./pages/Admin";
 import Websites from "./pages/Websites";
 import WebsiteDetail from "./pages/WebsiteDetail";
 import Custom from "./pages/Custom";
@@ -51,6 +53,8 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<StudioLayout><Home /></StudioLayout>} />
+        <Route path="/showcase" element={<StudioLayout><Showcase /></StudioLayout>} />
+        <Route path="/admin" element={<StudioLayout><Admin /></StudioLayout>} />
         <Route path="/websites" element={<StudioLayout><Websites /></StudioLayout>} />
         <Route path="/websites/:id" element={<StudioLayout><WebsiteDetail /></StudioLayout>} />
         <Route path="/custom" element={<StudioLayout><Custom /></StudioLayout>} />

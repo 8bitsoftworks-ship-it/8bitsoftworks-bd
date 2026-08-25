@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { getWebsiteById } from "../data/websites";
-import { STUDIO } from "../data/siteConfig";
+import { STUDIO, FORM_ENDPOINT } from "../data/siteConfig";
 
 const PAGES = ["Home", "About", "Services", "Contact"];
 
@@ -22,14 +22,13 @@ const CONTACT_EMAIL = STUDIO.email;
 function Section({ title, children }) {
   return (
     <div className="border-t border-ink/10 pt-5">
-      <h2 className="font-mono text-[10px] uppercase tracking-wide text-muted mb-3">{title}</h2>
+      <h2 className="label mb-3">{title}</h2>
       {children}
     </div>
   );
 }
 
-const fieldClass =
-  "w-full border border-ink/15 px-3 py-2.5 text-[13px] bg-transparent text-ink placeholder:text-muted/60 focus:border-ink/40 transition-colors";
+const fieldClass = "field-sm";
 
 function ColorField({ label, value, onChange }) {
   return (
@@ -48,9 +47,7 @@ function ChoiceChips({ options, value, onChange }) {
           key={o}
           type="button"
           onClick={() => onChange(o)}
-          className={`font-mono text-[10.5px] uppercase tracking-wide px-3 py-1.5 border transition-colors ${
-            value === o ? "bg-ink text-paper border-ink" : "border-ink/15 text-ink hover:border-ink/40"
-          }`}
+          className={value === o ? "chip-on" : "chip"}
         >
           {o}
         </button>
@@ -254,9 +251,12 @@ export default function Customize() {
     Testimonials: true,
     Contact: true,
   });
-  const [sent, setSent] = useState(false);
+  const [sent, setSent] = useState(null); // "form" | "mailto"
+  const [sending, setSending] = useState(false);
   const [name, setName] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
+  const [logoName, setLogoName] = useState("");
+  const logoRef = useRef(null);
 
   if (!site) return <Navigate to="/websites" replace />;
 
@@ -298,11 +298,51 @@ export default function Customize() {
     ].join("\n");
   }
 
-  function sendRequest() {
+  async function sendRequest() {
     const subject = `Customization request — ${site.name} (${brand || "your brand"})`;
     const body = buildEmailBody();
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+
+    const fd = new FormData();
+    fd.set("_subject", subject);
+    fd.set("_template", "table");
+    fd.set("_replyto", customerEmail || "");
+    fd.set("_captcha", "false");
+    fd.set("_honey", "");
+    fd.set("Website", site.name);
+    fd.set("Your name", name || "—");
+    fd.set("Your email", customerEmail || "—");
+    fd.set("Brand name", brand || "—");
+    fd.set("Theme", theme);
+    fd.set("Primary color", accent);
+    fd.set("Secondary color", secondary);
+    fd.set("Accent color", tertiary);
+    fd.set("Font style", font);
+    fd.set("Button style", buttonStyle);
+    fd.set("Header style", headerStyle);
+    fd.set("Visible sections", Object.entries(visibleSections).filter(([, v]) => v).map(([k]) => k).join(", ") || "none");
+    fd.set("Hero title", heroTitle || "—");
+    fd.set("Hero description", heroDesc || "—");
+    fd.set("CTA text", ctaText || "—");
+    fd.set("Contact email on site", contactEmail || "—");
+    Object.entries(socials).filter(([, v]) => v).forEach(([k, v]) => fd.set(`Social · ${k}`, v));
+    const logo = logoRef.current?.files?.[0];
+    if (logo) fd.set("attachment", logo);
+
+    setSending(true);
+    try {
+      const res = await fetch(FORM_ENDPOINT, { method: "POST", body: fd });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
+        setSent("form");
+        return;
+      }
+      throw new Error(data.message || "Could not submit the form.");
+    } catch {
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setSent("mailto");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -319,24 +359,33 @@ export default function Customize() {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => window.print()}
-            className="font-mono text-[11px] uppercase tracking-wide px-4 md:px-5 py-3 border border-ink/15 text-ink hover:border-ink/40 transition-colors"
+            className="btn-ghost"
           >
             Print
           </button>
           <button
             onClick={sendRequest}
-            disabled={!name || !customerEmail}
-            className="font-mono text-[11px] uppercase tracking-wide px-4 md:px-5 py-3 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors disabled:opacity-40 disabled:pointer-events-none"
+            disabled={!name || !customerEmail || sending}
+            className="btn-primary"
           >
-            Send Customization Request
+            {sending ? "Sending…" : "Send Customization Request"}
           </button>
         </div>
       </div>
 
       {sent && (
         <div className="mx-5 md:mx-8 mt-6 border border-mint-dim/40 bg-mint/10 px-4 py-3 text-[13px] text-ink no-print">
-          Your email draft has opened in your mail app addressed to {CONTACT_EMAIL} — just hit send and we'll
-          follow up with a quote and timeline for {site.name}.
+          {sent === "form" ? (
+            <>
+              Your customization request for {site.name} — including your logo if you uploaded one — has been
+              emailed to {CONTACT_EMAIL}. We'll follow up with a quote and timeline.
+            </>
+          ) : (
+            <>
+              Your email draft addressed to {CONTACT_EMAIL} has opened in your mail app — please attach your
+              logo before sending. We'll follow up with a quote and timeline for {site.name}.
+            </>
+          )}
         </div>
       )}
 
@@ -381,8 +430,14 @@ export default function Customize() {
             <div className="flex flex-col gap-3">
               <input className={fieldClass} placeholder="Brand name" value={brand} onChange={(e) => setBrand(e.target.value)} />
               <label className="text-[12px] text-muted flex items-center justify-between border border-dashed border-ink/20 px-3 py-2.5">
-                Upload logo
-                <input type="file" className="text-[11px] max-w-[120px]" />
+                {logoName || "Upload logo"}
+                <input
+                  ref={logoRef}
+                  type="file"
+                  accept="image/*"
+                  className="text-[11px] max-w-[120px]"
+                  onChange={(e) => setLogoName(e.target.files?.[0]?.name || "")}
+                />
               </label>
             </div>
           </Section>
@@ -467,9 +522,7 @@ export default function Customize() {
                   key={p}
                   type="button"
                   onClick={() => setPage(p)}
-                  className={`font-mono text-[10.5px] uppercase tracking-wide px-3 py-1.5 border transition-colors ${
-                    page === p ? "bg-ink text-paper border-ink" : "border-ink/15 text-ink hover:border-ink/40"
-                  }`}
+                  className={page === p ? "chip-on" : "chip"}
                 >
                   {p}
                 </button>
@@ -479,10 +532,10 @@ export default function Customize() {
 
           <button
             onClick={sendRequest}
-            disabled={!name || !customerEmail}
-            className="font-mono text-[12px] uppercase tracking-wide px-6 py-4 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors disabled:opacity-40 disabled:pointer-events-none"
+            disabled={!name || !customerEmail || sending}
+            className="btn-primary"
           >
-            Send Customization Request
+            {sending ? "Sending…" : "Send Customization Request"}
           </button>
         </div>
       </div>

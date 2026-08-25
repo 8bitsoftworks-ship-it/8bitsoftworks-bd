@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { STUDIO } from "../data/siteConfig";
+import { useState } from "react";
+import { STUDIO, FORM_ENDPOINT } from "../data/siteConfig";
 
 const CONTACT_EMAIL = STUDIO.email;
 
@@ -21,59 +21,115 @@ const TIMELINES = ["ASAP", "2–4 weeks", "1–2 months", "Flexible"];
 function Field({ label, hint, children }) {
   return (
     <div className="border-b border-ink/10 pb-6">
-      <label className="block font-mono text-[10.5px] uppercase tracking-wide text-muted mb-2.5">
-        {label}
-      </label>
+      <label className="label mb-2.5">{label}</label>
       {children}
       {hint && <p className="text-[12px] text-muted mt-2">{hint}</p>}
     </div>
   );
 }
 
-const inputClass =
-  "w-full bg-transparent border border-ink/15 px-3.5 py-3 text-[14px] text-ink placeholder:text-muted/70 focus:border-ink/40 transition-colors";
+function buildMailtoFallback({ form, type, budget, timeline }) {
+  const fd = new FormData(form);
+  const subject = `Custom build request — ${type} (${fd.get("name") || "unknown"})`;
+  const files = Array.from(fd.getAll("attachment"))
+    .filter((f) => f.name)
+    .map((f) => f.name);
+  const lines = [
+    `New custom build request`,
+    ``,
+    `Name: ${fd.get("name") || "—"}`,
+    `Email: ${fd.get("email") || "—"}`,
+    `Business / brand: ${fd.get("business") || "—"}`,
+    `Existing website: ${fd.get("existingSite") || "—"}`,
+    `Website type: ${type}`,
+    `Budget: ${budget}`,
+    `Timeline: ${timeline}`,
+    `Features needed: ${fd.get("features") || "—"}`,
+    `Reference websites: ${fd.get("references") || "—"}`,
+    `Project description: ${fd.get("description") || "—"}`,
+  ];
+  if (files.length) {
+    lines.push(
+      ``,
+      `Selected attachments (mail drafts can't carry files — please attach them):`,
+      files.map((f) => `- ${f}`).join("\n")
+    );
+  }
+  lines.push(``, `We'll reply within one business day.`);
+  return {
+    subject,
+    body: lines.join("\n"),
+  };
+}
 
 export default function Custom() {
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(null); // "form" | "mailto"
+  const [submitting, setSubmitting] = useState(false);
   const [type, setType] = useState("Business");
   const [budget, setBudget] = useState(BUDGETS[1]);
   const [timeline, setTimeline] = useState(TIMELINES[1]);
-  const formRef = useRef(null);
+  const [fileCount, setFileCount] = useState(0);
+  const [error, setError] = useState("");
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const lines = [
-      `New custom build request`,
-      ``,
-      `Name: ${fd.get("name") || "—"}`,
-      `Email: ${fd.get("email") || "—"}`,
-      `Business / brand: ${fd.get("business") || "—"}`,
-      `Existing website: ${fd.get("existingSite") || "—"}`,
-      `Website type: ${type}`,
-      `Budget: ${budget}`,
-      `Timeline: ${timeline}`,
-      `Features needed: ${fd.get("features") || "—"}`,
-      `Reference websites: ${fd.get("references") || "—"}`,
-      `Project description: ${fd.get("description") || "—"}`,
-      ``,
-      `We'll reply within one business day.`,
-    ];
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const subject = `Custom build request — ${type} (${fd.get("name") || "unknown"})`;
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
-    setSubmitted(true);
+
+    fd.set("_subject", subject);
+    fd.set("_template", "table");
+    fd.set("_replyto", fd.get("email") || "");
+    fd.set("_captcha", "false");
+    fd.set("_honey", "");
+    fd.set("Website type", type);
+    fd.set("Budget", budget);
+    fd.set("Timeline", timeline);
+
+    setSubmitting(true);
+    setError("");
+    try {
+      const res = await fetch(FORM_ENDPOINT, { method: "POST", body: fd });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
+        setSubmitted("form");
+        return;
+      }
+      throw new Error(data.message || "Could not submit the form.");
+    } catch {
+      // Fallback — never lose a request. Open a mailto draft with everything
+      // pre-filled; file attachments are listed since drafts can't carry them.
+      const draft = buildMailtoFallback({ form, type, budget, timeline });
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(draft.subject)}&body=${encodeURIComponent(draft.body)}`;
+      setSubmitted("mailto");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (submitted) {
+    const viaMailto = submitted === "mailto";
     return (
       <div className="mx-auto max-w-2xl px-5 md:px-8 py-24 md:py-32 text-center">
-        <span className="font-mono text-[11px] uppercase tracking-wide text-mint-dim">Request sent</span>
+        <span className="font-mono text-[11px] uppercase tracking-wide text-mint-dim">
+          {viaMailto ? "Email draft opened" : "Request sent"}
+        </span>
         <h1 className="font-display font-semibold text-[30px] md:text-[38px] text-ink mt-3 leading-tight">
-          Got it. We'll reply within one business day.
+          {viaMailto ? "Almost there — hit send." : "Got it. We'll reply within one business day."}
         </h1>
-        <p className="text-[14px] text-muted mt-3 max-w-[48ch] mx-auto">
-          Your email draft has opened in your mail app addressed to {CONTACT_EMAIL} — hit send and we'll come
-          back with a couple of questions, a rough scope, and a real timeline.
+        <p className="text-[14px] text-muted mt-3 max-w-[52ch] mx-auto leading-relaxed">
+          {viaMailto ? (
+            <>
+              Your email draft addressed to {CONTACT_EMAIL} has opened in your mail app — the details are
+              pre-filled. Please attach the files you selected (mail drafts can't carry them automatically),
+              then send.
+            </>
+          ) : (
+            <>
+              Your request — including any files you attached — has been emailed to {CONTACT_EMAIL}. We'll
+              come back with a couple of questions, a rough scope, and a real timeline.
+            </>
+          )}
         </p>
       </div>
     );
@@ -94,23 +150,23 @@ export default function Custom() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} ref={formRef} className="mx-auto max-w-3xl px-5 md:px-8 py-14 md:py-20">
+      <form onSubmit={handleSubmit} className="mx-auto max-w-3xl px-5 md:px-8 py-14 md:py-20">
         <div className="flex flex-col gap-7">
           <div className="grid sm:grid-cols-2 gap-7">
             <Field label="Name">
-              <input required className={inputClass} type="text" name="name" placeholder="Your full name" />
+              <input required className="field" type="text" name="name" placeholder="Your full name" />
             </Field>
             <Field label="Email">
-              <input required className={inputClass} type="email" name="email" placeholder="you@company.com" />
+              <input required className="field" type="email" name="email" placeholder="you@company.com" />
             </Field>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-7">
             <Field label="Business / brand">
-              <input className={inputClass} type="text" name="business" placeholder="Company or project name" />
+              <input className="field" type="text" name="business" placeholder="Company or project name" />
             </Field>
             <Field label="Existing website" hint="Leave blank if you're starting from zero.">
-              <input className={inputClass} type="url" name="existingSite" placeholder="https://" />
+              <input className="field" type="url" name="existingSite" placeholder="https://" />
             </Field>
           </div>
 
@@ -121,9 +177,7 @@ export default function Custom() {
                   type="button"
                   key={t}
                   onClick={() => setType(t)}
-                  className={`font-mono text-[10.5px] uppercase tracking-wide px-3 py-1.5 border transition-colors ${
-                    type === t ? "bg-ink text-paper border-ink" : "border-ink/15 text-ink hover:border-ink/40"
-                  }`}
+                  className={type === t ? "chip-on" : "chip"}
                 >
                   {t}
                 </button>
@@ -133,22 +187,14 @@ export default function Custom() {
 
           <div className="grid sm:grid-cols-2 gap-7">
             <Field label="Budget">
-              <select
-                className={inputClass}
-                value={budget}
-                onChange={(e) => setBudget(e.target.value)}
-              >
+              <select className="field" value={budget} onChange={(e) => setBudget(e.target.value)}>
                 {BUDGETS.map((b) => (
                   <option key={b}>{b}</option>
                 ))}
               </select>
             </Field>
             <Field label="Desired timeline">
-              <select
-                className={inputClass}
-                value={timeline}
-                onChange={(e) => setTimeline(e.target.value)}
-              >
+              <select className="field" value={timeline} onChange={(e) => setTimeline(e.target.value)}>
                 {TIMELINES.map((t) => (
                   <option key={t}>{t}</option>
                 ))}
@@ -157,35 +203,47 @@ export default function Custom() {
           </div>
 
           <Field label="Features needed" hint="Booking, payments, multi-language, a members' area — whatever applies.">
-            <textarea className={inputClass} rows={3} name="features" placeholder="List anything specific the site needs to do" />
+            <textarea className="field resize-none" rows={3} name="features" placeholder="List anything specific the site needs to do" />
           </Field>
 
           <Field label="Reference websites" hint="Sites whose feel — not necessarily content — you like.">
-            <input className={inputClass} type="text" name="references" placeholder="Paste a few links" />
+            <input className="field" type="text" name="references" placeholder="Paste a few links" />
           </Field>
 
           <Field label="Project description">
             <textarea
               required
-              className={inputClass}
+              className="field resize-none"
               rows={5}
               name="description"
               placeholder="What are you building, and who is it for?"
             />
           </Field>
 
-          <Field label="Attach files" hint="Brand assets, sketches, a brief — optional.">
-            <div className="border border-dashed border-ink/20 px-4 py-6 text-center text-[13px] text-muted">
-              Drop files here or click to upload
-              <input type="file" multiple className="block mx-auto mt-2 text-[12px]" />
-            </div>
+          <Field label="Attach files" hint="Brand assets, sketches, a brief — optional. Up to 10MB total.">
+            <label className="flex flex-col items-center justify-center gap-1.5 border border-dashed border-ink/20 px-4 py-7 text-center cursor-pointer hover:border-ink/40 transition-colors">
+              <span className="font-mono text-[10.5px] uppercase tracking-wide text-ink">
+                {fileCount > 0 ? `${fileCount} file${fileCount !== 1 ? "s" : ""} selected` : "Drop files here or click to upload"}
+              </span>
+              <span className="text-[12px] text-muted">Any format — brand assets, briefs, sketches.</span>
+              <input
+                type="file"
+                multiple
+                name="attachment"
+                className="sr-only"
+                onChange={(e) => setFileCount(e.target.files?.length || 0)}
+              />
+            </label>
           </Field>
+
+          {error && <p className="font-mono text-[11px] uppercase tracking-wide text-signal">{error}</p>}
 
           <button
             type="submit"
-            className="self-start font-mono text-[12px] uppercase tracking-wide px-6 py-4 bg-ink text-paper hover:bg-mint hover:text-ink transition-colors"
+            disabled={submitting}
+            className="btn-primary self-start disabled:opacity-50"
           >
-            Send Project Request
+            {submitting ? "Sending…" : "Send Project Request"}
           </button>
         </div>
       </form>
