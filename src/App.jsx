@@ -14,6 +14,8 @@ import Checkout from "./pages/Checkout";
 import About from "./pages/About";
 import HowItWorks from "./pages/HowItWorks";
 import Contact from "./pages/Contact";
+import Login from "./pages/Login";
+import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
 
 import DemoView from "./pages/DemoView";
@@ -52,6 +54,8 @@ export default function App() {
         <Route path="/about" element={<StudioLayout><About /></StudioLayout>} />
         <Route path="/how-it-works" element={<StudioLayout><HowItWorks /></StudioLayout>} />
         <Route path="/contact" element={<StudioLayout><Contact /></StudioLayout>} />
+        <Route path="/login" element={<StudioLayout><Login /></StudioLayout>} />
+        <Route path="/account" element={<StudioLayout><Account /></StudioLayout>} />
 
         {/* Live demo sites — intentionally have no studio chrome, they are the product.
             DemoView resolves :id against the demo registry and renders the demo's root,

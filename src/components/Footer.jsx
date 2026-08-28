@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { STUDIO, HOSTING } from "../data/siteConfig";
+import { useAuth } from "../data/auth";
 
 export default function Footer() {
+  const user = useAuth();
   return (
     <footer className="no-print border-t border-ink/10 bg-paper">
       {/* Hosting promo strip */}
@@ -66,6 +68,16 @@ export default function Footer() {
         </div>
 
         <div>
+          <div className="font-mono text-[10px] uppercase tracking-wide text-muted mb-3">Account</div>
+          <ul className="flex flex-col gap-2 text-[13px] text-ink">
+            <li><Link to={user ? "/account" : "/login"} className="hover:text-mint-dim">{user ? "My account" : "Sign in"}</Link></li>
+            {!user && <li><Link to="/login?mode=signup" className="hover:text-mint-dim">Create an account</Link></li>}
+            <li><Link to="/showcase" className="hover:text-mint-dim">Showcase</Link></li>
+            <li><Link to="/admin" className="hover:text-mint-dim">Admin</Link></li>
+          </ul>
+        </div>
+
+        <div>
           <div className="font-mono text-[10px] uppercase tracking-wide text-muted mb-3">Contact</div>
           <ul className="flex flex-col gap-2 text-[13px] text-ink">
             <li><a href={`mailto:${STUDIO.email}`} className="hover:text-mint-dim">{STUDIO.email}</a></li>
@@ -78,7 +90,6 @@ export default function Footer() {
         <span>© {new Date().getFullYear()} {STUDIO.name}. All builds original.</span>
         <span className="flex items-center gap-4">
           <span>{STUDIO.location}</span>
-          <Link to="/admin" className="text-muted/70 hover:text-ink transition-colors">Admin</Link>
         </span>
       </div>
     </footer>

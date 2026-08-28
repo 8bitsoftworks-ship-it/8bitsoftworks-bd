@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../data/auth";
 
 const links = [
   { to: "/websites", label: "Websites" },
@@ -13,6 +14,7 @@ const links = [
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const user = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -60,6 +62,12 @@ export default function Nav() {
 
         <div className="hidden md:flex items-center gap-3">
           <Link
+            to={user ? "/account" : "/login"}
+            className="font-mono text-[11px] uppercase tracking-wide px-3 py-2 text-muted hover:text-ink transition-colors"
+          >
+            {user ? "Account" : "Sign in"}
+          </Link>
+          <Link
             to="/websites"
             className="font-mono text-[11px] uppercase tracking-wide px-3 py-2 border border-ink/15 text-ink hover:border-ink/40 transition-colors"
           >
@@ -105,6 +113,13 @@ export default function Nav() {
             </NavLink>
           ))}
           <div className="flex flex-col gap-2 pt-3">
+            <Link
+              to={user ? "/account" : "/login"}
+              onClick={() => setOpen(false)}
+              className="font-mono text-[12px] uppercase tracking-wide px-3 py-2.5 text-center text-muted"
+            >
+              {user ? "Account" : "Sign in"}
+            </Link>
             <Link
               to="/websites"
               onClick={() => setOpen(false)}

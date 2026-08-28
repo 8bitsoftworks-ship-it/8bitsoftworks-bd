@@ -3,6 +3,7 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import PreviewFrame from "../components/PreviewFrame";
 import { getWebsiteById, formatPrice } from "../data/websites";
 import { STUDIO, PAYMENTS, PAYMENT_ORDER, HOSTING, AD_CREDIT, discountFor } from "../data/siteConfig";
+import { useAuth, addOrder } from "../data/auth";
 
 const CONTACT_EMAIL = STUDIO.email;
 
@@ -51,6 +52,7 @@ export default function Checkout() {
   const [method, setMethod] = useState("redotpay");
   const [paymentDetails, setPaymentDetails] = useState({});
   const [adCredit, setAdCredit] = useState(false);
+  const user = useAuth();
 
   if (!site) return <Navigate to="/websites" replace />;
 
@@ -108,6 +110,16 @@ export default function Checkout() {
     const orderId = "8BIT-" + Date.now().toString().slice(-6);
     const subject = `Order ${orderId} — ${site.name} (${pm.name}) from ${form.name}`;
     const body = buildEmailBody();
+    if (user) {
+      addOrder({
+        id: orderId,
+        site: site.name,
+        method: pm.name,
+        total,
+        status: "Pending",
+        date: new Date().toISOString().slice(0, 10),
+      });
+    }
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     next();
   }

@@ -382,6 +382,100 @@ function Beauty({ accent }) {
   );
 }
 
+function Legal({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#F6F2EA] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between font-mono text-[8px] text-ink/55">
+        <span>BARRETT & COLE</span>
+        <span>ATTORNEYS</span>
+      </div>
+      <div className="flex-1 flex flex-col justify-center gap-1">
+        <div className="font-display text-[15px] leading-none text-ink">Counsel</div>
+        <div className="font-display italic text-[15px] leading-none" style={{ color: accent }}>
+          without the runaround.
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-1.5 font-mono text-[6.5px] text-ink/55">
+        {["CONTRACTS", "LITIGATION", "CLOSINGS"].map((s) => (
+          <div key={s} className="border border-ink/15 px-1 py-1">{s}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Petcare({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#FBF3E8] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between font-mono text-[8px] text-ink/55">
+        <span>FETCH CLUB</span>
+        <span className="px-1.5 py-0.5 text-[7px]" style={{ background: accent, color: "#fff" }}>BOOK A WALK</span>
+      </div>
+      <div className="flex-1 flex items-center">
+        <div className="font-display text-[16px] leading-[1.02] text-ink">
+          Your dog,
+          <br />
+          <span style={{ color: accent }}>tired.</span>
+        </div>
+      </div>
+      <div className="flex items-center gap-1.5">
+        <div className="h-2.5 w-2.5 rounded-full border border-ink/20" />
+        <div className="h-2.5 w-2.5 rounded-full" style={{ background: accent }} />
+        <div className="h-2.5 w-2.5 rounded-full border border-ink/20" />
+      </div>
+    </div>
+  );
+}
+
+function Brewery({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#191512] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between">
+        <div className="font-display text-white text-[10px] tracking-wide">HARBOR HOPS</div>
+        <div className="font-mono text-[7px] text-white/35">TAP LIST</div>
+      </div>
+      <div className="flex-1 flex flex-col justify-center gap-1">
+        <div className="flex justify-between font-mono text-[7px] text-white/50 border-b border-white/10 pb-0.5">
+          <span>01 · HAZY IPA</span>
+          <span style={{ color: accent }}>6.2%</span>
+        </div>
+        <div className="flex justify-between font-mono text-[7px] text-white/50 border-b border-white/10 pb-0.5">
+          <span>02 · PORTER</span>
+          <span style={{ color: accent }}>5.8%</span>
+        </div>
+        <div className="flex justify-between font-mono text-[7px] text-white/50">
+          <span>03 · KOLSCH</span>
+          <span style={{ color: accent }}>4.9%</span>
+        </div>
+      </div>
+      <div className="font-display italic text-white text-[12px] leading-none">
+        Brewed on the water.
+      </div>
+    </div>
+  );
+}
+
+function Coworking({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#F1F3F6] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between font-mono text-[8px] text-ink/55">
+        <span>STATION ONE</span>
+        <span>BOOK A TOUR</span>
+      </div>
+      <div className="flex-1 flex flex-col justify-center">
+        <div className="font-display text-[16px] leading-none text-ink">Your office,</div>
+        <div className="font-display italic text-[16px] leading-none" style={{ color: accent }}>
+          but shared.
+        </div>
+      </div>
+      <div className="flex items-center gap-1">
+        <span className="font-mono text-[6.5px] text-ink/45 border border-ink/15 px-1 py-0.5">MONTHLY ৳9K</span>
+        <span className="font-mono text-[6.5px] text-ink/45 border border-ink/15 px-1 py-0.5" style={{ borderColor: accent, color: accent }}>ANNUAL −15%</span>
+      </div>
+    </div>
+  );
+}
+
 const VARIANTS = {
   restaurant: Restaurant,
   architecture: Architecture,
@@ -399,11 +493,15 @@ const VARIANTS = {
   events: Events,
   photography: Photography,
   beauty: Beauty,
+  legal: Legal,
+  petcare: Petcare,
+  brewery: Brewery,
+  coworking: Coworking,
 };
 
 export default function PreviewFrame({ variant, accent = "#39D9A0", name, className = "", showChrome = true, url }) {
   const Comp = VARIANTS[variant] || Restaurant;
-  const dark = variant === "saas" || variant === "restaurant" || variant === "agency" || variant === "fitness" || variant === "education";
+  const dark = variant === "saas" || variant === "restaurant" || variant === "agency" || variant === "fitness" || variant === "education" || variant === "brewery";
   return (
     <div className={`overflow-hidden border border-ink/10 bg-white ${className}`}>
       {showChrome && <Chrome url={url || `8bit.site/${(name || "").toLowerCase().replace(/\s+/g, "-")}`} dark={dark} />}

@@ -17,6 +17,10 @@ import DemoMeridian from "../demos/Meridian";
 import DemoTheDayOf from "../demos/TheDayOf";
 import DemoHallow from "../demos/Hallow";
 import DemoAtelierNine from "../demos/AtelierNine";
+import DemoBarrettCole from "../demos/BarrettCole";
+import DemoFetchClub from "../demos/FetchClub";
+import DemoHarborHops from "../demos/HarborHops";
+import DemoStationOne from "../demos/StationOne";
 
 const REGISTRY = {
   "sora-house": DemoSoraHouse,
@@ -35,6 +39,10 @@ const REGISTRY = {
   "the-day-of": DemoTheDayOf,
   hallow: DemoHallow,
   "atelier-nine": DemoAtelierNine,
+  "barrett-cole": DemoBarrettCole,
+  "fetch-club": DemoFetchClub,
+  "harbor-hops": DemoHarborHops,
+  "station-one": DemoStationOne,
 };
 
 export default function DemoView() {

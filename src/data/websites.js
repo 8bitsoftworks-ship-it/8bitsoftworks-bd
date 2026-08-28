@@ -20,6 +20,10 @@ export const categories = [
   "Events",
   "Photography",
   "Beauty",
+  "Legal",
+  "Pet Care",
+  "Brewery",
+  "Coworking",
 ];
 
 export const websites = [
@@ -294,6 +298,74 @@ export const websites = [
     accent: "#A24E3F",
     theme: "light",
     preview: "beauty",
+  },
+  {
+    id: "barrett-cole",
+    name: "Barrett & Cole",
+    category: "Legal",
+    price: 16500,
+    tags: ["Legal", "Law Firm", "Professional"],
+    description:
+      "A law firm site built for trust: practice areas laid out like a docket, a no-nonsense attorney index, and a consultation request that reads like a real form.",
+    longDescription:
+      "Barrett & Cole is for a firm that wins business on credibility, not buzzwords. The homepage leads with practice areas in a clear, indexed layout, names the attorneys with their focus areas, and keeps every call-to-action pointed at a consultation — no animation, no fluff.",
+    demoUrl: "/demos/barrett-cole",
+    hasFullDemo: true,
+    featured: false,
+    accent: "#9A6B4F",
+    theme: "light",
+    preview: "legal",
+  },
+  {
+    id: "fetch-club",
+    name: "Fetch Club",
+    category: "Pet Care",
+    price: 11000,
+    tags: ["Pet Care", "Local", "Services"],
+    description:
+      "A dog-walking and pet-care service site: a plain-language services grid, monthly plans with a real toggle, and a map area that says 'we come to you'.",
+    longDescription:
+      "Fetch Club is built for a local pet-care operator who wants bookings, not brand theater. Services are priced plainly with a monthly/one-off toggle, the team is human-sized, and the copy treats the pet owner like a neighbor rather than a lead.",
+    demoUrl: "/demos/fetch-club",
+    hasFullDemo: true,
+    featured: false,
+    accent: "#E8763B",
+    theme: "light",
+    preview: "petcare",
+  },
+  {
+    id: "harbor-hops",
+    name: "Harbor Hops",
+    category: "Brewery",
+    price: 12500,
+    tags: ["Brewery", "Food", "Hospitality"],
+    description:
+      "A brewery site with the taps up front: a rotating tap list, a food menu, and event nights — amber type on a dark, taproom-feel field.",
+    longDescription:
+      "Harbor Hops is for a brewery whose tap list changes faster than its website can usually keep up. The homepage leads with the current taps in a plain list, adds the food menu and event nights below, and stays dark and warm like the room itself.",
+    demoUrl: "/demos/harbor-hops",
+    hasFullDemo: true,
+    featured: false,
+    accent: "#D89A3C",
+    theme: "dark",
+    preview: "brewery",
+  },
+  {
+    id: "station-one",
+    name: "Station One",
+    category: "Coworking",
+    price: 15000,
+    tags: ["Coworking", "Workspace", "Membership"],
+    description:
+      "A coworking space site with membership plans on a monthly/annual toggle, a tour-booking flow, and the neighborhood worked into the design.",
+    longDescription:
+      "Station One is for a coworking space selling memberships, not day passes. The plans are on a real monthly/annual toggle, the amenities are listed like a spec sheet, and the whole site is built to move someone from 'curious' to 'book a tour'.",
+    demoUrl: "/demos/station-one",
+    hasFullDemo: true,
+    featured: false,
+    accent: "#5B7DB1",
+    theme: "light",
+    preview: "coworking",
   },
 ];
 

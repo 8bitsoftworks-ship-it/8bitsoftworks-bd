@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
 import PreviewFrame from "../components/PreviewFrame";
 import WebsiteCard from "../components/WebsiteCard";
 import { getWebsiteById, formatPrice, websites } from "../data/websites";
 import { HOSTING } from "../data/siteConfig";
+import { useAuth, toggleFavorite } from "../data/auth";
 
 const DEVICE_SIZES = {
   Desktop: "w-full aspect-[16/9]",
@@ -26,8 +27,19 @@ export default function WebsiteDetail() {
   const { id } = useParams();
   const site = getWebsiteById(id);
   const [device, setDevice] = useState("Desktop");
+  const user = useAuth();
+  const navigate = useNavigate();
+  const saved = !!user?.favorites?.includes(id);
 
   if (!site) return <Navigate to="/websites" replace />;
+
+  const onSave = () => {
+    if (!user) {
+      navigate("/login", { state: { from: `/websites/${id}` } });
+      return;
+    }
+    toggleFavorite(id);
+  };
 
   const related = websites.filter((w) => w.id !== site.id && w.category === site.category).slice(0, 3);
   const fallback = websites.filter((w) => w.id !== site.id).slice(0, 3);
@@ -101,15 +113,26 @@ export default function WebsiteDetail() {
             >
               Customize This Website
             </Link>
+            <button
+              type="button"
+              onClick={onSave}
+              className={`font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 border transition-colors ${
+                saved
+                  ? "border-mint-dim bg-mint/15 text-mint-dim"
+                  : "border-ink/15 text-ink hover:border-ink/40"
+              }`}
+            >
+              {saved ? "Saved" : "+ Save"}
+            </button>
             {site.hasFullDemo && (
-              <a
-                href={site.demoUrl}
+              <Link
+                to={site.demoUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="font-mono text-[12px] uppercase tracking-wide px-5 py-3.5 text-ink hover:text-mint-dim transition-colors underline underline-offset-4"
               >
                 Open Live Demo ↗
-              </a>
+              </Link>
             )}
           </div>
 
