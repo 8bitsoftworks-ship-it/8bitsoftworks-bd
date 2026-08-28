@@ -285,6 +285,103 @@ function Realestate({ accent }) {
   );
 }
 
+function Education({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#1D1D1A] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between">
+        <div className="font-display text-white text-[10px] tracking-wide">MERIDIAN</div>
+        <div className="font-mono text-[7px] px-1.5 py-0.5" style={{ background: accent, color: "#1D1D1A" }}>
+          ENROLL
+        </div>
+      </div>
+      <div className="flex-1 flex flex-col justify-center">
+        <div className="font-display text-white text-[13px] leading-none">Learn in public,</div>
+        <div className="font-display italic text-[13px] leading-none" style={{ color: accent }}>
+          taught in person.
+        </div>
+      </div>
+      <div className="flex gap-1.5">
+        {["DESIGN", "ENGINEERING", "BUSINESS"].map((s) => (
+          <div key={s} className="flex-1 border border-white/15 px-1 py-1 font-mono text-[6.5px] text-white/50">
+            {s}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Events({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#FBF7F2] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between font-mono text-[8px] text-ink/50">
+        <span>THE DAY OF</span>
+        <span>WEDDINGS · CORPORATE</span>
+      </div>
+      <div className="flex-1 grid grid-cols-2 gap-1.5">
+        <div className="flex flex-col gap-1.5">
+          <div className="flex-1" style={{ background: accent }} />
+          <div className="flex-1 bg-ink/15" />
+        </div>
+        <div className="flex flex-col justify-center">
+          <div className="font-display italic text-ink text-[14px] leading-none">
+            You plan the guest list.
+          </div>
+          <div className="font-display italic text-[14px] leading-none mt-0.5" style={{ color: accent }}>
+            We plan the day.
+          </div>
+        </div>
+      </div>
+      <div className="font-mono text-[7px] text-ink/45">120+ EVENTS · ONE TEAM</div>
+    </div>
+  );
+}
+
+function Photography({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#F6F3EC] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between font-mono text-[8px] text-ink/50">
+        <span>HALLOW</span>
+        <span className="px-1.5 py-0.5" style={{ background: accent, color: "#fff" }}>BOOK</span>
+      </div>
+      <div className="grid grid-cols-3 gap-1.5 flex-1">
+        {[0, 1, 2, 3, 4, 5].map((i) => (
+          <div key={i} className={i % 2 === 0 ? "bg-ink/70" : "bg-ink/25"} />
+        ))}
+      </div>
+      <div className="font-display text-ink text-[12px] leading-none">
+        Light you can <span className="italic" style={{ color: accent }}>keep.</span>
+      </div>
+    </div>
+  );
+}
+
+function Beauty({ accent }) {
+  return (
+    <div className="h-full w-full bg-[#FAF6F1] flex flex-col p-3 gap-2">
+      <div className="flex items-center justify-between font-mono text-[8px] text-ink/50">
+        <span>ATELIER NINE</span>
+        <span className="px-1.5 py-0.5" style={{ background: accent, color: "#fff" }}>BOOK</span>
+      </div>
+      <div className="flex-1 flex flex-col justify-center">
+        <div className="font-display italic text-ink text-[14px] leading-none">
+          Time for yourself,
+        </div>
+        <div className="font-display italic text-[14px] leading-none mt-0.5" style={{ color: accent }}>
+          booked properly.
+        </div>
+      </div>
+      <div className="flex gap-1.5">
+        {["HAIR", "SKIN", "NAILS"].map((s) => (
+          <div key={s} className="flex-1 border border-ink/10 px-1 py-1 font-mono text-[6.5px] text-ink/55">
+            {s}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const VARIANTS = {
   restaurant: Restaurant,
   architecture: Architecture,
@@ -298,11 +395,15 @@ const VARIANTS = {
   wellness: Wellness,
   finance: Finance,
   realestate: Realestate,
+  education: Education,
+  events: Events,
+  photography: Photography,
+  beauty: Beauty,
 };
 
 export default function PreviewFrame({ variant, accent = "#39D9A0", name, className = "", showChrome = true, url }) {
   const Comp = VARIANTS[variant] || Restaurant;
-  const dark = variant === "saas" || variant === "restaurant" || variant === "agency" || variant === "fitness";
+  const dark = variant === "saas" || variant === "restaurant" || variant === "agency" || variant === "fitness" || variant === "education";
   return (
     <div className={`overflow-hidden border border-ink/10 bg-white ${className}`}>
       {showChrome && <Chrome url={url || `8bit.site/${(name || "").toLowerCase().replace(/\s+/g, "-")}`} dark={dark} />}

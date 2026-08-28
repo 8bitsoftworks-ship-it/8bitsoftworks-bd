@@ -16,18 +16,7 @@ import HowItWorks from "./pages/HowItWorks";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
-import DemoSoraHouse from "./demos/SoraHouse";
-import DemoNorthline from "./demos/Northline";
-import DemoKairo from "./demos/Kairo";
-import DemoArcSupply from "./demos/ArcSupply";
-import DemoForma from "./demos/Forma";
-import DemoFieldNotes from "./demos/FieldNotes";
-import DemoMonoStudio from "./demos/MonoStudio";
-import DemoEmberGrain from "./demos/EmberGrain";
-import DemoVellore from "./demos/Vellore";
-import DemoHealwise from "./demos/Healwise";
-import DemoLedgerPine from "./demos/LedgerPine";
-import DemoOpenlot from "./demos/Openlot";
+import DemoView from "./pages/DemoView";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -64,19 +53,10 @@ export default function App() {
         <Route path="/how-it-works" element={<StudioLayout><HowItWorks /></StudioLayout>} />
         <Route path="/contact" element={<StudioLayout><Contact /></StudioLayout>} />
 
-        {/* Live demo sites — intentionally have no studio chrome, they are the product */}
-        <Route path="/demos/sora-house" element={<DemoSoraHouse />} />
-        <Route path="/demos/northline" element={<DemoNorthline />} />
-        <Route path="/demos/kairo" element={<DemoKairo />} />
-        <Route path="/demos/arc-supply" element={<DemoArcSupply />} />
-        <Route path="/demos/forma" element={<DemoForma />} />
-        <Route path="/demos/field-notes" element={<DemoFieldNotes />} />
-        <Route path="/demos/mono-studio" element={<DemoMonoStudio />} />
-        <Route path="/demos/ember-grain" element={<DemoEmberGrain />} />
-        <Route path="/demos/vellore" element={<DemoVellore />} />
-        <Route path="/demos/healwise" element={<DemoHealwise />} />
-        <Route path="/demos/ledger-pine" element={<DemoLedgerPine />} />
-        <Route path="/demos/openlot" element={<DemoOpenlot />} />
+        {/* Live demo sites — intentionally have no studio chrome, they are the product.
+            DemoView resolves :id against the demo registry and renders the demo's root,
+            which handles its own sub-pages from useParams(). */}
+        <Route path="/demos/:id/*" element={<DemoView />} />
 
         <Route path="*" element={<StudioLayout><NotFound /></StudioLayout>} />
       </Routes>

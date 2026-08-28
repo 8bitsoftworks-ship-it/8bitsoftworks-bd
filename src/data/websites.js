@@ -16,6 +16,10 @@ export const categories = [
   "Wellness",
   "Finance",
   "Real Estate",
+  "Education",
+  "Events",
+  "Photography",
+  "Beauty",
 ];
 
 export const websites = [
@@ -222,6 +226,74 @@ export const websites = [
     accent: "#C77B2C",
     theme: "light",
     preview: "realestate",
+  },
+  {
+    id: "meridian",
+    name: "Meridian",
+    category: "Education",
+    price: 15000,
+    tags: ["Education", "Courses", "Learning"],
+    description:
+      "A dark, focused online-courses site for a teaching studio — course catalogue, pricing toggle, and an enroll flow that respects your time.",
+    longDescription:
+      "Meridian is built for a small teaching studio selling live online courses rather than a sprawling learning platform. A warm accent on a dark field keeps it calm while courses get filtered by track, pricing toggles between monthly and annual, and every page moves toward enrollment without guilt-tripping copy.",
+    demoUrl: "/demos/meridian",
+    hasFullDemo: true,
+    featured: true,
+    accent: "#FFD84D",
+    theme: "dark",
+    preview: "education",
+  },
+  {
+    id: "the-day-of",
+    name: "The Day Of",
+    category: "Events",
+    price: 16000,
+    tags: ["Events", "Weddings", "Planning"],
+    description:
+      "An event-planning studio site with a warm, serif-led voice — service packages, a filterable gallery, and a conversation-first enquiry form.",
+    longDescription:
+      "The Day Of is for an event planner whose clients are deciding on the biggest day of their lives. The tone is warm and confident, packages are laid out plainly, and the gallery filters by wedding, corporate, and private events so clients can see the work that looks like theirs.",
+    demoUrl: "/demos/the-day-of",
+    hasFullDemo: true,
+    featured: true,
+    accent: "#D9837A",
+    theme: "light",
+    preview: "events",
+  },
+  {
+    id: "hallow",
+    name: "Hallow",
+    category: "Photography",
+    price: 14000,
+    tags: ["Photography", "Portfolio", "Studio"],
+    description:
+      "A portrait and editorial photography studio site — a filterable portfolio, honest packages, and a booking form that treats every enquiry like a person.",
+    longDescription:
+      "Hallow is built for a photographer whose portfolio is the product and whose personality is the reason clients book. Work filters by portrait, couples, and editorial, packages are priced without opacity, and the booking page asks the questions a real consultation would.",
+    demoUrl: "/demos/hallow",
+    hasFullDemo: true,
+    featured: true,
+    accent: "#C6A15B",
+    theme: "light",
+    preview: "photography",
+  },
+  {
+    id: "atelier-nine",
+    name: "Atelier Nine",
+    category: "Beauty",
+    price: 13000,
+    tags: ["Beauty", "Salon", "Booking"],
+    description:
+      "A calm salon site for hair, skin, and nails — services filtered by category, an atelier team page, and a booking flow built around named appointments.",
+    longDescription:
+      "Atelier Nine is for a salon that sells calm and competence in equal measure. Services are organized by hair, skin, and nails with plain prices, the team page introduces the actual people you'll book, and appointments are always made with a named therapist — never 'whoever's free'.",
+    demoUrl: "/demos/atelier-nine",
+    hasFullDemo: true,
+    featured: false,
+    accent: "#A24E3F",
+    theme: "light",
+    preview: "beauty",
   },
 ];
 
