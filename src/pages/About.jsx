@@ -25,15 +25,10 @@ export default function About() {
         <div className="grid md:grid-cols-3 gap-10">
           <div className="md:col-span-2 flex flex-col gap-5 text-[15px] text-ink/85 leading-relaxed">
             <p>
-              8BiT Softworks started from a simple annoyance: most businesses
-              don't need a six-week discovery process to get a website — they
-              need a good one, fast, that doesn't look like everyone else's.
+              8BiT Softworks was created out of a simple annoyance: most businesses don’t need a six-week discovery process to get a website – they need a good one, fast, that doesn’t look like everyone else’s.
             </p>
             <p>
-              So we build finished websites first, show them as real, working
-              demos, and let people buy what they see. If it needs to be
-              different — a different name, different colors, a different
-              structure entirely — we do that too.
+              So we build finished websites first, show them as real working demos and let people buy what they see. If it needs to be different – different name, different colors, different structure all-together – we do that too.
             </p>
             <p>
               We're not a template marketplace and we're not a traditional
